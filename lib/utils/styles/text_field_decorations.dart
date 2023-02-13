@@ -7,7 +7,7 @@ class TextFieldBorders {
   static OutlineInputBorder textFieldBorder() {
     return const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(width: 2.0, color: Colors.grey));
+        borderSide: BorderSide(width: 2.0, color: Colors.transparent));
   }
 
   static OutlineInputBorder textFieldEnableBorder() {
@@ -34,7 +34,7 @@ class TextFieldBorders {
   static OutlineInputBorder textFieldDisableBorder() {
     return const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(2)),
-      borderSide: BorderSide(width: 2.0, color: Colors.grey),
+      borderSide: BorderSide(width: 2.0, color: Colors.transparent),
     );
   }
 }
