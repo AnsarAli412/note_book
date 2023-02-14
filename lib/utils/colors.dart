@@ -11,11 +11,11 @@ const Color disableBtnColor = Colors.grey;
 
 
 /// aapBarBgColor
-Color appbarBgColor = mainColor;
+Color appbarBgColor = Colors.black;
 const Color appBarActionsIconColor = Colors.white;
 const Color appBarIconColor = Colors.white;
 const Color appBarTextColor = Colors.white;
-Color scaffoldBgColor = Colors.white70;
+Color scaffoldBgColor = Colors.black;
 
 /// bottom navigation bar
 const Color bottomNavigationBarColor = Color(0xFF231E72);
@@ -25,6 +25,7 @@ const Color cardBgColor  = Colors.amber;
 const Color tileColor = Colors.white;
 const Color selectedTileColor = Colors.grey;
 const Color indicatorColor = Color(0xFF231E72);
+const Color iconBgColor = Color(0xFF3B3B3B);
 
 
 /// image background color
@@ -33,7 +34,7 @@ const imageBackgroundColor = Colors.grey;
 const progressIndicatorColor = Colors.black;
 Color appBarColor = mainColor;
 Color backgroundColor = Colors.white;
-Color secondaryBgColor = mainColor;
+Color secondaryBgColor = Colors.transparent;
 Color whiteColor = Colors.white;
 Color blackColor = Colors.black;
 Color floatingActionButtonColor = Colors.white;

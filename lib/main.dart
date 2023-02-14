@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_book/controllers/note_controller.dart';
+import 'package:note_book/utils/themes/app_theme.dart';
 import 'package:note_book/view/screens/notes/notes_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,10 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Note Book',
+      debugShowCheckedModeBanner: false,
+      theme: AppThemeData(context: context).theme(),
       home: const NotesScreen(),
     );
   }

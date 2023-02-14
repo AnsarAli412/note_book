@@ -105,6 +105,6 @@ class AppThemeData {
   }
 
   FloatingActionButtonThemeData _floatingActionButtonThemeData(){
-    return const FloatingActionButtonThemeData(backgroundColor: buttonColor);
+    return const FloatingActionButtonThemeData(backgroundColor: iconBgColor,elevation: 6);
   }
 }

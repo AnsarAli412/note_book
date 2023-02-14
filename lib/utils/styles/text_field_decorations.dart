@@ -1,40 +1,31 @@
 
 import 'package:flutter/material.dart';
 
-import '../colors.dart';
 
 class TextFieldBorders {
-  static OutlineInputBorder textFieldBorder() {
-    return const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(width: 2.0, color: Colors.grey));
+  static OutlineInputBorder textFieldBorder({double? borderWidth, Color? borderColor,double? borderRadius}) {
+    return _inputBorder(borderColor: borderColor,borderRadius: borderRadius,borderWidth: borderWidth);
   }
 
-  static OutlineInputBorder textFieldEnableBorder() {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(6)),
-      borderSide: BorderSide(color: secondaryBgColor, width: 2.0),
-    );
+  static OutlineInputBorder textFieldEnableBorder({double? borderWidth, Color? borderColor,double? borderRadius}) {
+    return _inputBorder(borderColor: borderColor,borderRadius: borderRadius,borderWidth: borderWidth);
   }
 
-  static OutlineInputBorder textFieldFocusBorder() {
-    return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(6)),
-      borderSide: BorderSide(color: secondaryBgColor, width: 2.0),
-    );
+  static OutlineInputBorder textFieldFocusBorder({double? borderWidth, Color? borderColor,double? borderRadius}) {
+    return _inputBorder(borderColor: borderColor,borderRadius: borderRadius,borderWidth: borderWidth);
   }
 
-  static OutlineInputBorder textFieldErrorBorder() {
-    return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(6)),
-      borderSide: BorderSide(color: Colors.red, width: 2.0),
-    );
+  static OutlineInputBorder textFieldErrorBorder({double? borderWidth, Color? borderColor,double? borderRadius}) {
+    return _inputBorder(borderColor: borderColor,borderRadius: borderRadius,borderWidth: borderWidth);
   }
 
-  static OutlineInputBorder textFieldDisableBorder() {
-    return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-      borderSide: BorderSide(width: 2.0, color: Colors.grey),
-    );
+   OutlineInputBorder textFieldDisableBorder({double? borderWidth, Color? borderColor,double? borderRadius}) {
+    return _inputBorder(borderColor: borderColor,borderRadius: borderRadius,borderWidth: borderWidth);
   }
+
+  static OutlineInputBorder _inputBorder({double? borderWidth, Color? borderColor,double? borderRadius}) =>OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(borderRadius??4)),
+    borderSide: BorderSide(width: borderWidth??2.0, color: borderColor??Colors.transparent),
+  );
+
 }
