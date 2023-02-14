@@ -11,14 +11,13 @@ class NewNoteWidgets {
 
   NewNoteWidgets({required this.context});
 
-  Widget appBarView(bool isEnable, {required void Function()? onEyeClick,required void Function()? onBackPress}) {
+  Widget appBarView(bool isEnable,
+      {required void Function() onEyeClick,
+      required void Function() onBackPress}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _iconBgView(Icons.keyboard_arrow_left_sharp, onTap: () {
-          finish(context);
-          onEyeClick;
-        }),
+        _iconBgView(Icons.keyboard_arrow_left_sharp, onTap: onBackPress),
         _iconBgView(
             isEnable ? Icons.remove_red_eye_outlined : Icons.remove_red_eye,
             onTap: onEyeClick),
@@ -89,7 +88,7 @@ class NewNoteWidgets {
         controller: controller,
         keyboardType: keyBoardType,
         enabled: isEnabled,
-        style: AppTextStyles.normalTextStyle(txtColor: Colors.white,size: 16),
+        style: AppTextStyles.normalTextStyle(txtColor: Colors.white, size: 16),
         decoration: InputDecoration(
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 10),

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:note_book/models/notes/note_model.dart';
+import 'package:note_book/utils/extensions/date_time_extensions.dart';
 import 'package:note_book/utils/extensions/widget_extensions.dart';
-import 'package:note_book/utils/shapes/app_shapes.dart';
+import 'package:note_book/utils/sizes/app_sizes.dart';
 import 'package:note_book/utils/styles/text_style.dart';
+import 'package:note_book/view/screens/search_note/search_note_screen.dart';
 
 import '../../../../utils/colors.dart';
 
 class NotesWidgets {
   BuildContext context;
+
   NotesWidgets({required this.context});
 
   Widget appBarView({required void Function()? onHelpClick}) {
@@ -18,7 +21,7 @@ class NotesWidgets {
         Row(
           children: [
             _iconBgView(Icons.search, onTap: () {
-              finish(context);
+              const SearchNoteScreen().launchWidget(context);
             }),
             _iconBgView(Icons.refresh, onTap: onHelpClick),
           ],
@@ -60,33 +63,67 @@ class NotesWidgets {
     );
   }
 
-  Widget listItemView(int index,{required NoteModel data, void Function()? onTap}) {
-    return ListTile(
-      tileColor: Colors.primaries[index % Colors.primaries.length].shade300,
-      shape: circularBorderShape(borderColor: Colors.transparent),
+  Widget listItemView(int index,
+      {required NoteModel data, void Function()? onTap}) {
+    var width = screenWidth(context);
+    return InkWell(
       onTap: onTap,
-      title: Text(
-        data.title ?? "",
-        style: AppTextStyles.boldTextStyle(size: 24),
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
-      ),
-      subtitle: Text(
-        data.description ?? "",
-        style: AppTextStyles.normalTextStyle(),
-        maxLines: 3,
-        overflow: TextOverflow.ellipsis,
-      ),
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        width: width,
+        color: Colors.primaries[index % Colors.primaries.length].shade300,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              data.title ?? "",
+              style: AppTextStyles.boldTextStyle(size: 24),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              data.description ?? "",
+              style: AppTextStyles.normalTextStyle(),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+            5.height,
+            _dateAndTimeView(data.updatedAt ?? DateTime.now())
+          ],
+        ),
+      ).cornerRadiusWithClipRRect(6),
     );
   }
 
-  Widget noNoteView(){
+  Widget _dateAndTimeView(DateTime dateTime) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          dateTime.getToday(),
+          style:
+              AppTextStyles.normalTextStyle(txtColor: Colors.white, size: 10),
+        ),
+        Text(
+          dateTime.getTimeIn12Hours(),
+          style:
+              AppTextStyles.normalTextStyle(txtColor: Colors.white, size: 10),
+        )
+      ],
+    );
+  }
+
+  Widget noNoteView({String? imagePath}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset("assets/images/empty_note.png"),
-        Text("Create your first note !",style: AppTextStyles.normalTextStyle(txtColor: Colors.white,size: 14),)
+        Image.asset(imagePath ?? "assets/images/empty_note.png"),
+        Text(
+          "Create your first note !",
+          style:
+              AppTextStyles.normalTextStyle(txtColor: Colors.white, size: 14),
+        )
       ],
     );
   }

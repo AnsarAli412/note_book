@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../controllers/note_controller.dart';
 import '../../../models/notes/note_model.dart';
 import '../../../utils/styles/text_style.dart';
+import 'package:intl/intl.dart';
 
 class UpdateNoteScreen extends StatefulWidget {
   final NoteModel data;
@@ -69,9 +70,11 @@ class _UpdateNoteScreenState extends State<UpdateNoteScreen> {
    }
 
   _autoSaveNote() async {
+    var now = DateTime.now();
+    var currentDateTime = DateFormat("yyyy-MM-dd hh:mm:ss").format(now);
     var controller = Provider.of<NoteController>(context,listen: false);
     var data = NoteModel(
-        title: titleController.text, description: descController.text);
+        title: titleController.text, description: descController.text,updatedAt: DateTime.parse(currentDateTime));
     controller.getNoteData(title: titleController.text, desc: descController.text);
     await noteController.updateNote(data, id: widget.data.id??0);
   }

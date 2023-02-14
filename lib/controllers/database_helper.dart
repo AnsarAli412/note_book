@@ -65,7 +65,13 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>?> getAllData() async {
     Database? db = await instance.db;
-    return await db?.query(_tableName);
+    return await db?.query(_tableName,orderBy: "$columnCreatedAt DESC");
+  }
+
+  Future<List<Map<String, dynamic>>?> searchData(String searchQuery) async {
+    Database? db = await instance.db;
+   // return await db?.query(_tableName,orderBy: "$columnId DESC",where: "$columnTitle = $searchQuery");
+    return await db?.rawQuery("SELECT * FROM $_tableName WHERE $columnTitle LIKE '%$searchQuery%' ORDER BY $columnCreatedAt");
   }
 
   Future<List<Map<String, dynamic>>?> getDataById({required int id}) async {

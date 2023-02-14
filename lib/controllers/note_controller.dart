@@ -9,6 +9,10 @@ class NoteController extends ChangeNotifier {
 
   List<NoteModel> get notes => _notes;
 
+  List<NoteModel> _searchNotes = <NoteModel>[];
+
+  List<NoteModel> get searchNotes => _searchNotes;
+
   getAllNotes() async {
     List<Map<String, dynamic>>? data = await _dbInstance.getAllData();
     if (data != null) {
@@ -16,6 +20,7 @@ class NoteController extends ChangeNotifier {
       notifyListeners();
     } else {
       _notes = List<NoteModel>.empty();
+      notifyListeners();
     }
   }
 
@@ -32,7 +37,8 @@ class NoteController extends ChangeNotifier {
   Future<int?> updateNote(NoteModel data,{required int id}){
     var rowData = {
       DatabaseHelper.columnTitle :data.title,
-      DatabaseHelper.columnDescription : data.description
+      DatabaseHelper.columnDescription : data.description,
+      DatabaseHelper.columnUpdatedAt:data.updatedAt?.toIso8601String()
     };
     return _dbInstance.updateData(rowData: rowData,id: id);
   }
@@ -46,6 +52,22 @@ class NoteController extends ChangeNotifier {
 
   getNoteData({required String title, required String desc}){
     _noteData = NoteModel(title: title,description: desc);
+    notifyListeners();
+  }
+
+  searchNoteByTitle(String searchQuery)async{
+    List<Map<String, dynamic>>? data = await _dbInstance.searchData(searchQuery);
+    if (data != null) {
+      _searchNotes = data.map((e) => NoteModel.fromMap(e)).toList();
+      notifyListeners();
+    } else {
+      _searchNotes = List<NoteModel>.empty();
+      notifyListeners();
+    }
+  }
+
+  clearSearchedNotes(){
+    _searchNotes = List<NoteModel>.empty();
     notifyListeners();
   }
 }
